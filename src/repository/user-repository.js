@@ -36,6 +36,7 @@ class UserRepository{
             const user = await User.findByPK(userId, {
                 attributes : ["id", "email"]
             });
+            return user;
         } catch (error) {
             console.log("something went wrong in the repository layer");
             throw error;
