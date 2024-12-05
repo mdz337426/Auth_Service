@@ -3,8 +3,9 @@ const app = express();
 const bodyParser = require('body-parser')
 const { PORT } = require('./config/configServer')  
 const apiRoutes = require('./routes/index')
-const {User} = require('./models/index')
 const bcrypt = require('bcrypt');
+const UserService = require('./services/user-service');
+
 
 
 const startserver = ()=>{
@@ -14,7 +15,7 @@ const startserver = ()=>{
     app.listen(PORT, async ()=>{
         console.log(`server started on port ${PORT}`); 
     });
-    
+     
 }
 
 
