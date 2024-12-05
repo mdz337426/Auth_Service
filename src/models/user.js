@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const {signature} = require('../config/configServer');
+const encryptPassword = require('encrypt-password');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -34,6 +36,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+
+  });
+
+  User.beforeCreate((user)=>{
+    const encryptedPassword = encryptPassword(user.password, signature);
+   user.password = encryptedPassword;
+
   });
   return User;
 };
