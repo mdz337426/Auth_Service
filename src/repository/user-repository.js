@@ -33,7 +33,7 @@ class UserRepository{
     async getUserByID(userId)
     {
         try {
-            const user = await User.findByPK(userId, {
+            const user = await User.findByPk(userId, {
                 attributes : ["id", "email"]
             });
             return user;

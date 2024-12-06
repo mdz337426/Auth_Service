@@ -66,6 +66,27 @@ class UserService{
             throw error;
         }
     }
+
+    isAuthenticated(token)
+    {
+       try {
+        const response = this.verifytoken(token);
+        if(!response)
+        {
+            throw {err : "token is invalid"};
+        }
+        const user = this.userRepository.getUserByID(response.Id);
+        if(!user)
+        {
+            throw {err  : "user no long exist"};
+        }
+        return user.Id;
+       } catch (error) {
+            console.log("unable to verify token", error);
+            throw error;
+       }
+
+    }
  
     checkPassword(userInputPassword, encryptedPassword)
     {
