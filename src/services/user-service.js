@@ -42,8 +42,7 @@ class UserService{
             throw error;
         }
     }
-
-
+ 
     createtoken(user)
     {
         try {
@@ -57,7 +56,6 @@ class UserService{
         }
     }
 
-
     verifytoken(token)
     {
         try {
@@ -69,7 +67,6 @@ class UserService{
         }
     }
  
-
     checkPassword(userInputPassword, encryptedPassword)
     {
         try {
@@ -80,9 +77,5 @@ class UserService{
             throw error;
         }
     } 
-
-
 }
-
-
 module.exports = UserService;
