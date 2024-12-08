@@ -25,7 +25,7 @@ const startserver = ()=>{
         const u1 = await User.findByPk(4);
         const r1 = await role.findByPk(3);
 
-        u1.addRole(r1);
+        //u1.addRole(r1);
     });
      
 }

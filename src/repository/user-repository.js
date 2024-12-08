@@ -1,5 +1,5 @@
 const { where, Model } = require('sequelize');
-const {User} = require('../models/index');
+const {User, role} = require('../models/index');
 
 class UserRepository{
 
@@ -55,6 +55,24 @@ class UserRepository{
             console.log("something went wrong in the repository layer");
             throw error;
         }
+    }
+
+    async isAdmin(userId)
+    {
+        try {
+            const user = await User.findByPk(userId);
+            const admin = await role.findOne({
+                where :{
+                    name : "Admin"
+                }
+            });
+            return user.hasRole(admin);
+            
+        } catch (error) {
+            console.log("something went wrong in the repository layer");
+            throw error;
+        }
+
     }
 
 

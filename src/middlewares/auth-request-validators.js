@@ -5,7 +5,7 @@ const authValidator = (req, res, next)=>
     {
         return res.status(400).json({
             success : false,
-            err : "email or password missing",
+            err : "email or password missing"
         })
     }
 
@@ -13,4 +13,20 @@ const authValidator = (req, res, next)=>
 
 }
 
-module.exports = authValidator;
+const adminValidator = (req, res, next)=>{
+
+    if(!req.body.id)
+    {
+        return res.status(400).json({
+            success : false,
+            err : "not signed in"
+        });
+    }
+
+    next();
+}
+
+module.exports = {
+    authValidator,
+    adminValidator
+}

@@ -1,4 +1,3 @@
-module.exports = {
-    authValidator : require("./auth-request-validators")
-}
+const  AuthValidator = require('./auth-request-validators');
 
+module.exports = AuthValidator;
