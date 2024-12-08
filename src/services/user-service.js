@@ -67,7 +67,7 @@ class UserService{
         }
     }
 
-    isAuthenticated(token)
+    async isAuthenticated(token)
     {
        try {
         const response = this.verifytoken(token);
@@ -75,7 +75,7 @@ class UserService{
         {
             throw {err : "token is invalid"};
         }
-        const user = this.userRepository.getUserByID(response.Id);
+        const user =await this.userRepository.getUserByID(response.Id);
         if(!user)
         {
             throw {err  : "user no long exist"};
