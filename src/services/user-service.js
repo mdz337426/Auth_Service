@@ -2,7 +2,8 @@ const UserRepository = require("../repository/user-repository");
 const jwtoken = require('jsonwebtoken')
 const {JWT_KEY} = require('../config/configServer')
 const bcrypt = require('bcrypt');
-const AppError = require("../utils/error-handler");
+const AppError = require("../utils/error/error-handler");
+const { StatusCodes } = require("http-status-codes");
 class UserService{
     constructor()
     {
@@ -48,8 +49,17 @@ class UserService{
             return newJWT;
 
         } catch (error) {
+            if(error.name == 'AttributeNotFound')
+            {
+                throw error;
+            }
             console.log("somethng went wrong in the signin process");
-            throw error;
+            throw new AppError(
+                "AppError",
+                "Somthing went wrong in service layer",
+                "Not able to sign in",
+                StatusCodes.BAD_REQUEST
+            );
         }
     }
  
