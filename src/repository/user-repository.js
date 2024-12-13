@@ -1,4 +1,5 @@
-const { where, Model } = require('sequelize');
+const { where, Model} = require('sequelize');
+const ValidationError = require('../utils/validationError')
 const {User, role} = require('../models/index');
 
 class UserRepository{
@@ -9,6 +10,11 @@ class UserRepository{
             const user = await User.create(data);
             return user;
         } catch (error) {
+            if(error.name == "SequelizeValidationError")
+            {  
+                console.log(error.name);
+              throw new ValidationError(error);  
+            }
             console.log("something went wrong in the repository layer");
             throw error;
         }

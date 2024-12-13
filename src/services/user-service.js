@@ -2,6 +2,7 @@ const UserRepository = require("../repository/user-repository");
 const jwtoken = require('jsonwebtoken')
 const {JWT_KEY} = require('../config/configServer')
 const bcrypt = require('bcrypt');
+const AppError = require("../utils/error-handler");
 class UserService{
     constructor()
     {
@@ -15,8 +16,17 @@ class UserService{
             return user;
         } catch (error) {
 
-            console.log("something went wrong in service layer");
-            throw error;
+            if(error.name == 'ValidationError')
+            {
+                throw error;
+            }
+
+            throw new AppError(
+                "ServerError",
+                "Something went wrong in service layer",
+                "Logical Issue found",
+                500
+            );
        }
     }
 
